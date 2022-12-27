@@ -1,0 +1,44 @@
+[package]
+name = "xcm-executor"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+cosmwasm-std = { git = "https://github.com/ComposableFi/cosmwasm.git", branch = "main", features = [
+    "staking",
+    "stargate",
+    "no_std",
+], default-features = false }
+serde = { version = "1.0.147", default-features = false, features = [
+    "derive",
+    "alloc",
+] }
+cw-storage-plus = { git = "https://github.com/CosmWasm/cw-storage-plus",  default-features = false }
+xcm = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "gav-xcm-v3" }
+cw20 = { git = "https://github.com/CosmWasm/cw-plus", default-features = false}
+
+parity-scale-codec = { version = "3.1.5", default-features = false, features = [
+    "derive",
+] }
+
+[dev-dependencies]
+cw-multi-test = "0.16.0"
+
+[features]
+default = ["disable_target_static_assertions"]
+std = ["parity-scale-codec/std", "xcm/std"]
+no_std = ["cosmwasm-std/no_std"]
+
+disable_target_static_assertions = []
+
+[profile.release]
+lto = true
+debug = false
+debug-assertions = false
+opt-level = "s"
+overflow-checks = false
+panic = "abort"
+rpath = false
