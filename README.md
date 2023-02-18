@@ -4,7 +4,8 @@ XCM message format and execution engine ported from [Polkadot](https://github.co
 
 Consists of several packages:
 
-`xcm` - serialization and deserialization of XCM messages
+`xcm-proto` - serialization and deserialization of XCM messages. XCM assumed to be ProtoBuf encoded by sender.
+
 `xcm-executor-go` - IBC go module to execute XCM message
 
 ## Execution of message
